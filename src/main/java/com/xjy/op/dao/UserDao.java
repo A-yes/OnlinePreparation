@@ -22,7 +22,7 @@ public class UserDao {
         String password = jdbcTemplate.queryForObject("select password from s_user where username=?",
                 String.class, user.getUsername());
         //验证密码是否正确，如果正确则返回相对应的User对象，不正确则什么都不返回，程序的最后会返回null
-        if (EncodeUtils.validatePassword(password, user.getPassword())) {
+        if (password.equals(user.getPassword())) {
             return jdbcTemplate.queryForObject(
                     "select * from s_user where username=?",
                     new Object[]{user.getUsername()},
